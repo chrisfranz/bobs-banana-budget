@@ -1,0 +1,75 @@
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  margin: 0;
+  background-image: linear-gradient(to bottom right, yellow, green, rgb(117, 29, 6));
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+#root{
+  display: flex;
+  justify-content: center;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: row;
+
+}
+
+h1, h4 {
+  color: rgb(255, 255, 255);
+  font-family: arial;
+}
+
+h4 {
+  margin: 0;
+}
+
+#title {
+  text-align: center;
+}
+
+.start-date {
+  padding: 30px 0;
+}
+
+.number-of-days {
+  padding-bottom: 5px;
+}
+
+#total-display{
+  margin-top: 20px;
+}
+
+#total-display-items{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#banana {
+  width: 250px;
+  height: 250px;
+  margin: 0 50px;
+  -webkit-animation: spin 3s infinite linear;
+}
+
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
