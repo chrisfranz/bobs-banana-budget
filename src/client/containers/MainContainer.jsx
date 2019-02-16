@@ -25,7 +25,7 @@ class MainContainer extends Component {
     }
   }
 
-  onFormSubmit = (e) => {
+  handleFormSubmit = (e) => {
     // prevent page refresh on submit
     e.preventDefault();
     // convert formDate to match endpoint's expected input (DD/MM/YYYY)
@@ -33,18 +33,14 @@ class MainContainer extends Component {
     // store submitted numDays value, coerce to type 'number' to match endpoint's expected input type
     const numDays = e.target.elements.numDays.value * 1;
     
+    const url = 'http://localhost:3333/total-cost' + '?date=' + date + '&numDays=' + numDays;
     // posts date, numDays to endpoint, receives totalCost
-    fetch('http://localhost:3333/total-cost', {
-      method: 'POST',
-      mode: 'cors',
-      body: JSON.stringify({ date, numDays }),
-      headers: { 
-        'Content-Type': 'application/json'
-      }
-    })
+    fetch(url)
     .then(res => res.json())
-    .then(data => data.toFixed(2))
-    .then(data => this.setState({ totalCost: '$' + data }))
+    .then(amount => {
+      const formattedAmount = amount.toFixed(2);
+      this.setState({ totalCost: '$' + formattedAmount })
+    })
     .catch(error => console.error('Error: ', error));
   }
 
@@ -56,7 +52,7 @@ class MainContainer extends Component {
         </div>
         <div>
           <Form 
-            onFormSubmit={this.onFormSubmit}
+            onFormSubmit={this.handleFormSubmit}
           />
           <TotalDisplay 
             totalCost={this.state.totalCost}
