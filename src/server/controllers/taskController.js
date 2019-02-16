@@ -11,7 +11,7 @@ module.exports = {
     const valid = verifyInput(date, numDays);
     // verify input fails, exit
     if (!valid) {
-      res.send('Invalid Input');
+      res.status(400).send('Invalid Input');
       return;
     }
     // if verify input passes, call next middleware function;
@@ -28,7 +28,7 @@ module.exports = {
     const { formattedDate } = res.locals;
     const validDate = verifyDate(formattedDate);
     if (!validDate) {
-      res.send('Invalid Date');
+      res.status(400).send('Invalid Date');
       return;
     }
     next();
@@ -39,7 +39,11 @@ module.exports = {
     const { formattedDate } = res.locals;
 
     res.locals.total = getTotal(formattedDate, numDays);
-
+    next();
+  },
+  transformQueryString(req, res, next) {
+    const { date, numDays } = req.query;
+    req.body = { date, numDays: numDays * 1}
     next();
   }
 };

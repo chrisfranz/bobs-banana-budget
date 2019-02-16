@@ -19,6 +19,16 @@ app.use((req, res, next) => {
   next();
 });
 
+app.get('/total-cost',
+  taskController.transformQueryString,
+  taskController.verifyValidInput,
+  taskController.formatDate,
+  taskController.verifyValidDate,
+  taskController.calculateAmount,
+  (req, res) => {
+    const { total } = res.locals;
+    res.send(total);
+})
 
 app.post('/total-cost',
   taskController.verifyValidInput,
